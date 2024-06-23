@@ -1,5 +1,6 @@
 import pygame
 import player
+import coin
 
 class Game:
 
@@ -10,7 +11,8 @@ class Game:
         self.clock = pygame.time.Clock()
         self.max_fps = 60
         self.background_color = (50, 45, 50)
-        self.player = player.Player()
+        self.coins = [coin.Coin(100, 100), coin.Coin(230, 160), coin.Coin(400, 10),]
+        self.player = player.Player(25, 25, self)
         pygame.init()
 
     def run(self):
@@ -29,8 +31,13 @@ class Game:
                                 running = False
 
             self.player.update(delta_time)
+            for coin in self.coins:
+                coin.update(delta_time)
+
             self.window.fill(self.background_color)
             self.player.draw(self.window)
+            for coin in self.coins:
+                coin.draw(self.window)
             pygame.display.update()
 
         pygame.quit()
