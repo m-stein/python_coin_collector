@@ -1,9 +1,9 @@
 import pygame
+import coin
 
 class Player:
 
-    def __init__(self, x, y, game):
-        self.game = game
+    def __init__(self, x, y):
         self.x = x
         self.y = y
         self.width = 20
@@ -14,7 +14,7 @@ class Player:
     def velocity(self, delta_time):
         return self.speed * delta_time
 
-    def update(self, delta_time):
+    def update(self, delta_time, coins, surface_width, surface_height):
         collider = pygame.Rect(self.x, self.y, self.width, self.height)
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_UP]:
@@ -25,9 +25,9 @@ class Player:
             self.x -= self.velocity(delta_time)
         if key_pressed[pygame.K_RIGHT]:
             self.x += self.velocity(delta_time)
-        for coin in self.game.coins:
+        for coin in coins:
             if collider.colliderect(coin.collider):
-                self.game.coins.remove(coin)
+                coin.respawn(surface_width, surface_height)
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.color, (self.x, self.y, self.width, self.height))

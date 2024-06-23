@@ -12,7 +12,7 @@ class Game:
         self.max_fps = 60
         self.background_color = (50, 45, 50)
         self.coins = [coin.Coin(100, 100), coin.Coin(230, 160), coin.Coin(400, 10),]
-        self.player = player.Player(25, 25, self)
+        self.player = player.Player(25, 25)
         pygame.init()
 
     def run(self):
@@ -30,7 +30,7 @@ class Game:
                             case pygame.K_ESCAPE:
                                 running = False
 
-            self.player.update(delta_time)
+            self.player.update(delta_time, self.coins, self.window_width, self.window_height)
             for coin in self.coins:
                 coin.update(delta_time)
 
