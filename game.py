@@ -16,7 +16,7 @@ class Game:
         while num_coins:
             self.coins.append(coin.Coin(self.window_width, self.window_height))
             num_coins = num_coins - 1
-        self.player = player.Player(25, 25)
+        self.player = player.Player(25, 2, self.window_width, self.window_height)
         pygame.init()
 
     def run(self):
@@ -34,7 +34,7 @@ class Game:
                             case pygame.K_ESCAPE:
                                 running = False
 
-            self.player.update(delta_time, self.coins, self.window_width, self.window_height)
+            self.player.update(delta_time, self.coins)
             for curr_coin in self.coins:
                 curr_coin.update(delta_time)
 
