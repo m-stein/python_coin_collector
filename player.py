@@ -32,6 +32,17 @@ class Player:
 
         if direction.mag > 0:
             self.pos += direction.norm() * self.velocity(delta_time)
+            if self.pos.x < 0:
+                self.pos.x = 0
+            if self.pos.y < 0:
+                self.pos.y = 0
+            max_x = self.move_area_width - self.width
+            if self.pos.x > max_x:
+                self.pos.x = max_x
+            max_y = self.move_area_height - self.height
+            if self.pos.y > max_y:
+                self.pos.y = max_y
+
             self.update_collider()
             for coin in coins:
                 if self.collider.colliderect(coin.collider):
