@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3a83fb1c-1c7f-472f-8a18-0b6686e8f957" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +176,23 @@
       <option name="project" value="LOCAL" />
       <updated>1719336139472</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="restrict player movement to window area">
+      <option name="closed" value="true" />
+      <created>1719359609018</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1719359609018</updated>
+    </task>
+    <task id="LOCAL-00012" summary="show player score">
+      <option name="closed" value="true" />
+      <created>1719361782066</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1719361782066</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +226,8 @@
     <MESSAGE value="dynamic coin count; coins always spawn at random position" />
     <MESSAGE value="fix diagonal player speed" />
     <MESSAGE value="use vpython for vectors" />
-    <option name="LAST_COMMIT_MESSAGE" value="use vpython for vectors" />
+    <MESSAGE value="restrict player movement to window area" />
+    <MESSAGE value="show player score" />
+    <option name="LAST_COMMIT_MESSAGE" value="show player score" />
   </component>
 </project>

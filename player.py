@@ -3,7 +3,7 @@ import vpython as vp
 
 class Player:
 
-    def __init__(self, x, y, move_area_width, move_area_height):
+    def __init__(self, x, y, move_area_width, move_area_height, score, coins):
         self.collider = None
         self.pos = vp.vector(x, y, 0.)
         self.move_area_width = move_area_width
@@ -12,12 +12,14 @@ class Player:
         self.height = 20
         self.speed = 200
         self.color = (100, 120, 100)
+        self.score = score
+        self.coins = coins
         self.update_collider()
 
     def velocity(self, delta_time):
         return self.speed * delta_time
 
-    def update(self, delta_time, coins):
+    def update(self, delta_time):
         key_pressed = pygame.key.get_pressed()
 
         direction = vp.vector(0., 0., 0.)
@@ -44,9 +46,10 @@ class Player:
                 self.pos.y = max_y
 
             self.update_collider()
-            for coin in coins:
+            for coin in self.coins:
                 if self.collider.colliderect(coin.collider):
                     coin.spawn()
+                    self.score.increment()
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.color, (self.pos.x, self.pos.y, self.width, self.height))
