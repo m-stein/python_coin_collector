@@ -14,6 +14,7 @@ class Player:
         self.color = (100, 120, 100)
         self.score = score
         self.coins = coins
+        self.sprite = pygame.image.load("content/player.png").convert_alpha()
         self.update_collider()
 
     def velocity(self, delta_time):
@@ -52,7 +53,7 @@ class Player:
                     self.score.increment()
 
     def draw(self, surface):
-        pygame.draw.rect(surface, self.color, (self.pos.x, self.pos.y, self.width, self.height))
+        surface.blit(self.sprite, (self.pos.x, self.pos.y))
 
     def update_collider(self):
-        self.collider = pygame.Rect(self.pos.x, self.pos.y, self.width, self.height)
+        self.collider = pygame.Rect(self.pos.x + 8, self.pos.y + 16, 17, 14)

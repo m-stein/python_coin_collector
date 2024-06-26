@@ -8,6 +8,7 @@ class Game:
 
     def __init__(self, num_coins):
         pygame.init()
+        pygame.display.set_caption("CoinCollector")
         self.window_width = 800
         self.window_height = 600
         self.window = pygame.display.set_mode((self.window_width, self.window_height))
@@ -47,10 +48,10 @@ class Game:
 
             # draw to window surface
             self.window.fill(self.background_color)
-            self.player.draw(self.window)
             for curr_coin in self.coins:
                 curr_coin.draw(self.window)
             self.score.draw(self.window)
+            self.player.draw(self.window)
 
             pygame.display.update()
 
