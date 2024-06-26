@@ -5,16 +5,19 @@ class Player:
 
     def __init__(self, x, y, move_area_width, move_area_height, score, coins):
         self.collider = None
-        self.pos = vp.vector(x, y, 0.)
+        self.pos = vp.vector(x, y, 0)
         self.move_area_width = move_area_width
         self.move_area_height = move_area_height
         self.width = 20
         self.height = 20
         self.speed = 200
-        self.color = (100, 120, 100)
         self.score = score
         self.coins = coins
         self.sprite = pygame.image.load("content/player.png").convert_alpha()
+        self.sprite_scale = 2
+        self.sprite_scaled_size = vp.vector(self.sprite.get_width(), self.sprite.get_height(), 0) * self.sprite_scale
+        self.collider_offset = vp.vector(8, 16, 0) * self.sprite_scale
+        self.collider_size = vp.vector(17, 14, 0) * self.sprite_scale
         self.update_collider()
 
     def velocity(self, delta_time):
@@ -53,7 +56,14 @@ class Player:
                     self.score.increment()
 
     def draw(self, surface):
-        surface.blit(self.sprite, (self.pos.x, self.pos.y))
+        surface.blit(
+            pygame.transform.scale(
+                self.sprite, (self.sprite_scaled_size.x, self.sprite_scaled_size.y)),
+            (self.pos.x, self.pos.y))
 
     def update_collider(self):
-        self.collider = pygame.Rect(self.pos.x + 8, self.pos.y + 16, 17, 14)
+        self.collider = pygame.Rect(
+            self.pos.x + self.collider_offset.x,
+            self.pos.y + self.collider_offset.y,
+            self.collider_size.x,
+            self.collider_size.y)
