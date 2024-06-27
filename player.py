@@ -13,17 +13,35 @@ class Player:
         self.speed = 200
         self.score = score
         self.coins = coins
-        self.sprite = pygame.image.load("content/player.png").convert_alpha()
         self.sprite_scale = 2
+        self.sprite = pygame.image.load("content/player_standing_down.png").convert_alpha()
+        self.sprite = pygame.transform.scale(
+            self.sprite,
+            (self.sprite.get_width() * self.sprite_scale, self.sprite.get_height() * self.sprite_scale))
+        self.frame = 0
+        self.frame_width = 32 * self.sprite_scale
+        self.frame_height = 32 * self.sprite_scale
+        self.frame_duration = 0.5
+        self.frame_time = 0.
+        self.num_frames = 4
         self.sprite_scaled_size = vp.vector(self.sprite.get_width(), self.sprite.get_height(), 0) * self.sprite_scale
         self.collider_offset = vp.vector(8, 16, 0) * self.sprite_scale
         self.collider_size = vp.vector(17, 14, 0) * self.sprite_scale
         self.update_collider()
 
+    def draw_frame(self, surface, frame, destination):
+        surface.blit(
+            self.sprite, (destination.x, destination.y),
+            (frame * self.frame_width, 0, self.frame_width, self.frame_height))
+
     def velocity(self, delta_time):
         return self.speed * delta_time
 
     def update(self, delta_time):
+        self.frame_time += delta_time
+        self.frame = (self.frame + int(self.frame_time / self.frame_duration)) % self.num_frames
+        self.frame_time %= self.frame_duration
+
         key_pressed = pygame.key.get_pressed()
 
         direction = vp.vector(0., 0., 0.)
@@ -56,10 +74,7 @@ class Player:
                     self.score.increment()
 
     def draw(self, surface):
-        surface.blit(
-            pygame.transform.scale(
-                self.sprite, (self.sprite_scaled_size.x, self.sprite_scaled_size.y)),
-            (self.pos.x, self.pos.y))
+        self.draw_frame(surface, self.frame, self.pos)
 
     def update_collider(self):
         self.collider = pygame.Rect(
