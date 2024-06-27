@@ -45,14 +45,16 @@ class Player:
 
         if direction.mag > 0:
             self.pos += direction.norm() * self.velocity(delta_time)
-            if self.pos.x < 0:
-                self.pos.x = 0
-            if self.pos.y < 0:
-                self.pos.y = 0
-            max_x = self.move_area_width - self.width
+            min_x = -self.collider_offset.x
+            if self.pos.x < min_x:
+                self.pos.x = min_x
+            min_y = -self.collider_offset.y
+            if self.pos.y < min_y:
+                self.pos.y = min_y
+            max_x = self.move_area_width - self.collider_offset.x - self.collider_size.x
             if self.pos.x > max_x:
                 self.pos.x = max_x
-            max_y = self.move_area_height - self.height
+            max_y = self.move_area_height - self.collider_offset.y - self.collider_size.y
             if self.pos.y > max_y:
                 self.pos.y = max_y
 

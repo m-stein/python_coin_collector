@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a83fb1c-1c7f-472f-8a18-0b6686e8f957" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/animation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
     </list>
@@ -240,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719499938267</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="introduce animation class for spritesheet animations">
+      <option name="closed" value="true" />
+      <created>1719500797838</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1719500797838</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -279,6 +286,7 @@
     <MESSAGE value="static player sprite and window caption" />
     <MESSAGE value="scale player sprite" />
     <MESSAGE value="animate standing player" />
-    <option name="LAST_COMMIT_MESSAGE" value="animate standing player" />
+    <MESSAGE value="introduce animation class for spritesheet animations" />
+    <option name="LAST_COMMIT_MESSAGE" value="introduce animation class for spritesheet animations" />
   </component>
 </project>
