@@ -1,5 +1,7 @@
 import pygame
 import vpython as vp
+import animation
+
 
 class Player:
 
@@ -18,30 +20,17 @@ class Player:
         self.sprite = pygame.transform.scale(
             self.sprite,
             (self.sprite.get_width() * self.sprite_scale, self.sprite.get_height() * self.sprite_scale))
-        self.frame = 0
-        self.frame_width = 32 * self.sprite_scale
-        self.frame_height = 32 * self.sprite_scale
-        self.frame_duration = 0.5
-        self.frame_time = 0.
-        self.num_frames = 4
         self.sprite_scaled_size = vp.vector(self.sprite.get_width(), self.sprite.get_height(), 0) * self.sprite_scale
         self.collider_offset = vp.vector(8, 16, 0) * self.sprite_scale
         self.collider_size = vp.vector(17, 14, 0) * self.sprite_scale
+        self.animation = animation.Animation(vp.vector(32, 32, 0) * self.sprite_scale, 4, 0.5)
         self.update_collider()
-
-    def draw_frame(self, surface, frame, destination):
-        surface.blit(
-            self.sprite, (destination.x, destination.y),
-            (frame * self.frame_width, 0, self.frame_width, self.frame_height))
 
     def velocity(self, delta_time):
         return self.speed * delta_time
 
     def update(self, delta_time):
-        self.frame_time += delta_time
-        self.frame = (self.frame + int(self.frame_time / self.frame_duration)) % self.num_frames
-        self.frame_time %= self.frame_duration
-
+        self.animation.update(delta_time)
         key_pressed = pygame.key.get_pressed()
 
         direction = vp.vector(0., 0., 0.)
@@ -74,7 +63,7 @@ class Player:
                     self.score.increment()
 
     def draw(self, surface):
-        self.draw_frame(surface, self.frame, self.pos)
+        surface.blit(self.sprite, (self.pos.x, self.pos.y), self.animation.frame_rectangle())
 
     def update_collider(self):
         self.collider = pygame.Rect(
